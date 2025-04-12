@@ -93,3 +93,140 @@ expert-connect/
 │   │   └── api.js
 │
 └── README.md
+
+
+import { useEffect, useState } from "react";
+import axiosInstance from "../utils/axiosInstance";
+
+const UserDashboard = () => {
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      const res = await axiosInstance.get("/dashboard/user");
+      setBookings(res.data);
+    };
+    fetchBookings();
+  }, []);
+
+  return (
+    <div className="p-6">
+      <h1 className="text-xl font-bold mb-4">Your Bookings</h1>
+      {bookings.map((booking) => (
+        <div key={booking._id} className="p-4 border rounded mb-2">
+          <p><strong>Expert:</strong> {booking.expertId.name}</p>
+          <p><strong>Time:</strong> {new Date(booking.slot).toLocaleString()}</p>
+          <p><strong>Status:</strong> {booking.status}</p>
+          <a href={booking.sessionLink} className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
+            Join Session
+          </a>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default UserDashboard;
+
+
+import { useEffect, useState } from "react";
+import axiosInstance from "../utils/axiosInstance";
+import { useParams } from "react-router-dom";
+
+const BookExpert = () => {
+  const { expertId } = useParams();
+  const [expert, setExpert] = useState(null);
+  const [slot, setSlot] = useState("");
+
+  useEffect(() => {
+    const fetchExpert = async () => {
+      const res = await axiosInstance.get(/experts/${expertId});
+      setExpert(res.data);
+    };
+    fetchExpert();
+  }, [expertId]);
+
+  const handleBooking = async () => {
+    const res = await axiosInstance.post("/bookings", { expertId, slot });
+    alert("Session Link: " + res.data.sessionLink);
+  };
+
+  if (!expert) return <div>Loading...</div>;
+
+  return (
+    <div className="p-6">
+      <h1 className="text-xl">{expert.name}</h1>
+      <p>{expert.specialization}</p>
+      <p>Price: ₹{expert.price}</p>
+      <select onChange={(e) => setSlot(e.target.value)} className="mt-4">
+        <option>Select Slot</option>
+        {expert.availableSlots.map((s) => (
+          <option key={s} value={s}>{new Date(s).toLocaleString()}</option>
+        ))}
+      </select>
+      <button onClick={handleBooking} className="block mt-4 bg-green-500 px-4 py-2 text-white">
+        Book Now
+      </button>
+    </div>
+  );
+};
+
+export default BookExpert;
+
+import axios from "axios";
+
+const axiosInstance = axios.create({
+  baseURL: "http://localhost:5000/api", // adjust if needed
+});
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) config.headers.Authorization = Bearer ${token};
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+export default axiosInstance;
+
+import axiosInstance from "../utils/axiosInstance";
+
+const fetchProfile = async () => {
+  const res = await axiosInstance.get("/auth/profile");
+  console.log(res.data);
+};
+
+
+import { createContext, useContext, useState, useEffect } from "react";
+
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) setUser(JSON.parse(savedUser));
+  }, []);
+
+  const login = (userData, token) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => useContext(AuthContext);
