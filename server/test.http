@@ -3,8 +3,8 @@ POST http://localhost:4000/auth-api/register
 Content-Type: application/json
 
 {
-    "name": "sharath", 
-    "email": "karthikgajavelly@gmail.com",
+    "name": "Rishi", 
+    "email": "rishivar.d@gmail.com",
     "password": "12345", 
     "role": "expert"
 }
@@ -14,17 +14,16 @@ POST http://localhost:4000/auth-api/login
 Content-Type: application/json
 
 {
-    "email": "karthikgajavelly0017@gmail.com", 
+    "email": "rishivar.d@gmail.com", 
     "password": "12345"
 }
 
 ### Create or update expert
 POST http://localhost:4000/expert-api/experts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE3MWM0MGVmZGNhMjAyZmRhMzZlNSIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ0NjY2MzcsImV4cCI6MTc0NTA3MTQzN30.mUs6GIq3cnC31B4_NXWxDPnhY34eBxSWbfFFx6IaU_I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTNlYTQxNzQxMDIzOGMwZjYxNyIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ0NTYwNTAsImV4cCI6MTc0NTA2MDg1MH0.3vZl7yo3UT3x3liXJH-IZtnMK-m1EIwAHmg-iobLRo0
 
 {
-    "userId": "67fa71c40efdca202fda36e5",
     "bio": "Certified career coach helping students navigate job interviews.",
     "domain": "Career Coaching",
     "price": 3000,
@@ -34,26 +33,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE3MWM0M
 
 ### Get all experts by using filter
 ### expert?domain=Web%20Development&minPrice=30&maxPrice=100&tag=React
-GET http://localhost:4000/expert-api/expert?domain=Career%20Coaching&minPrice=30&maxPrice=3000&tag=Resume
+GET http://localhost:4000/expert-api/expert
 
 ### Get expert by id
-GET http://localhost:4000/expert-api/expert/67fa73f30efdca202fda36ea
+GET http://localhost:4000/expert-api/expert/67fa49aca417410238c0f61d
 
 ### Book an appointment
 POST http://localhost:4000/booking-api/bookings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE2OTVlOWY5Y2M3NzNhMTQ3Zjg5YiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ0NDY5OTc1LCJleHAiOjE3NDUwNzQ3NzV9.Q7ch1uF-Vmvo4rmjKDi2n-EJAlPMzTMcpfPRvcIXA_4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTI2YTQxNzQxMDIzOGMwZjYxMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ0NDU2MjQ1LCJleHAiOjE3NDUwNjEwNDV9.y7XitOn1Hg2w_fGonROguannXRiNrMEnsp7R0Q0ZVNQ
 
 {
-    "expertId": "67fa73f30efdca202fda36ea", 
+    "expertId": "67fa49aca417410238c0f61d", 
     "date": "2025-04-15", 
-    "time": "15:00"
+    "time": "10:00"
 }
 
 ### Get all user bookings
 GET http://localhost:4000/booking-api/user-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE2OTVlOWY5Y2M3NzNhMTQ3Zjg5YiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ0NDY5OTc1LCJleHAiOjE3NDUwNzQ3NzV9.Q7ch1uF-Vmvo4rmjKDi2n-EJAlPMzTMcpfPRvcIXA_4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTI2YTQxNzQxMDIzOGMwZjYxMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ0NDU2MjQ1LCJleHAiOjE3NDUwNjEwNDV9.y7XitOn1Hg2w_fGonROguannXRiNrMEnsp7R0Q0ZVNQ
 
 ### Get all expert bookings
 GET http://localhost:4000/booking-api/expert-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE2OTVlOWY5Y2M3NzNhMTQ3Zjg5YiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ0NDY5OTc1LCJleHAiOjE3NDUwNzQ3NzV9.Q7ch1uF-Vmvo4rmjKDi2n-EJAlPMzTMcpfPRvcIXA_4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTNlYTQxNzQxMDIzOGMwZjYxNyIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ0NTYzNDgsImV4cCI6MTc0NTA2MTE0OH0.yc_FnVhNBeOYOQSgz-e8GFMPFXFCIGtgOCUG-gN7tYU
