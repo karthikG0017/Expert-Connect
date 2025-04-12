@@ -14,7 +14,7 @@ POST http://localhost:4000/auth-api/login
 Content-Type: application/json
 
 {
-    "email": "karthikgajavelly0017@gmail.com", 
+    "email": "karthikgajavelly001@gmail.com", 
     "password": "12345"
 }
 
@@ -34,7 +34,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE3MWM0M
 
 ### Get all experts by using filter
 ### expert?domain=Web%20Development&minPrice=30&maxPrice=100&tag=React
-GET http://localhost:4000/expert-api/expert?domain=Career%20Coaching&minPrice=30&maxPrice=3000&tag=Resume
+GET http://localhost:4000/expert-api/expert
 
 ### Get expert by id
 GET http://localhost:4000/expert-api/expert/67fa73f30efdca202fda36ea
