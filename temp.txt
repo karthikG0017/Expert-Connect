@@ -1,0 +1,95 @@
+const filters = {
+    domain: "Web Development",
+    minPrice: 20,
+    maxPrice: 80,
+    tag: "React & Node"
+};
+
+const queryString = buildQueryParams(filters);
+// Output: "?domain=Web%20Development&minPrice=20&maxPrice=80&tag=React%20%26%20Node"
+
+const url = `http://localhost:4000/api/experts${queryString}`;
+
+console.log(url);
+
+function buildQueryParams(params) {
+    const query = Object.entries(params)
+        .map(([key, value]) => 
+            value !== undefined && value !== "" 
+                ? `${encodeURIComponent(key)}=${encodeURIComponent(value)}` 
+                : ""
+        )
+        .filter(Boolean)
+        .join("&");
+
+    return query ? `?${query}` : "";
+}
+
+
+expert-connect/
+│
+├── backend/
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── expertController.js
+│   │   ├── bookingController.js
+│   │   ├── chatController.js
+│   │   └── aiSuggestionController.js
+│   │
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   │   └── roleMiddleware.js
+│   │
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Expert.js
+│   │   ├── Booking.js
+│   │   ├── Message.js
+│   │   └── SessionLink.js
+│   │
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── expertRoutes.js
+│   │   ├── bookingRoutes.js
+│   │   ├── chatRoutes.js
+│   │   └── aiRoutes.js
+│   │
+│   ├── utils/
+│   │   ├── generateToken.js
+│   │   └── generateMeetLink.js
+│   │
+│   ├── socket.js
+│   ├── server.js
+│   └── .env
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Auth/
+│   │   │   │   ├── Login.js
+│   │   │   │   └── Register.js
+│   │   │   ├── Expert/
+│   │   │   │   ├── ExpertCard.js
+│   │   │   │   └── ExpertList.js
+│   │   │   ├── Booking/
+│   │   │   │   ├── BookingForm.js
+│   │   │   │   └── BookingConfirmation.js
+│   │   │   ├── Chat/
+│   │   │   │   └── ChatModal.js
+│   │   │   ├── Navbar.js
+│   │   │   └── ProtectedRoute.js
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Home.js
+│   │   │   ├── Experts.js
+│   │   │   ├── Bookings.js
+│   │   │   └── Profile.js
+│   │   │
+│   │   ├── context/
+│   │   │   └── AuthContext.js
+│   │   │
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   └── api.js
+│
+└── README.md

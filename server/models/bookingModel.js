@@ -2,27 +2,29 @@ const mongoose=require('mongoose')
 
 const bookingSchema=new mongoose.Schema({
     userId:{
-        type:mongoose>Schema.Types.ObjectId,
-        ref:'User'
-    },
-    expertId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Expert'
+        ref:'User', 
+        required: true
     },
-    dateTime:{
-        type:Date,
+    expertId:{ 
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Expert', 
+        required: true 
     },
-    status:{
-        type:String,
-        enum:['pending','confirmed','completed'],
-        default:'pending'
+    date:{
+        type: String,
+        required: true
+    }, 
+    time:{
+        type:String, 
+        required: true
+    },
+    isConfirmed:{
+        type: Boolean, 
+        default: true
     },
     meetLink:{
         type:String
-    },
-    createdAt:{
-        type:Date,
-        default:Date.now
     }
 })
 
