@@ -11,7 +11,6 @@ import './ExpertPage.css'
 
 function ExpertPage() {
     const expertId=useParams()
-    const [flag,setFlag]=useState(0)
     const {user, setUser} = useAuth();
     const [expert, setExpert] = useState();
     const [selectedDate, setSelectedDate] = useState("");
@@ -33,7 +32,6 @@ function ExpertPage() {
         const fetchExpert=async ()=>{
             try{
             const res=await axios.get(`http://localhost:4000/expert-api/expert/${expertId.expertId}`)
-            console.log(res.data.payload)
             setExpert(res.data.payload)
             }
             catch (err){
@@ -81,9 +79,14 @@ function ExpertPage() {
           }
         );
         console.log("Booking successful:", res.data);
-        setFlag(1)
+        alert("Booking succesful!");
       } catch (err) {
-        console.error('Error:', err);
+        if (err.response.data.message === "Slot already booked") {
+          alert("Slot already booked");
+        } else {
+          alert(`Sorry, something error occured!`);
+          console.log("Error:", err);
+        }
       }
     };
   return (
@@ -116,9 +119,6 @@ function ExpertPage() {
       </select>
     </div>
     <button className="btn btn-primary" onClick={handleBook}>Book</button>
-    {
-      flag===1?<p>Booking Successful</p>:<p></p>
-    }
     </div>
 
   )

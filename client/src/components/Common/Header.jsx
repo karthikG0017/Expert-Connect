@@ -10,7 +10,6 @@ function Header() {
         logout();
         navigate("/");
     };
-    console.log(user);
 
     return (
         <div className="w-full p-6 flex justify-between items-center shadow-md bg-white">
