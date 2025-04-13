@@ -15,8 +15,12 @@ const bookingSchema=new mongoose.Schema({
         type: String,
         required: true
     }, 
-    time:{
+    StartTime:{
         type:String, 
+        required: true
+    },
+    EndTime:{
+        type:String,
         required: true
     },
     isConfirmed:{
