@@ -19,4 +19,17 @@ bookingApp.get('/avail-bookings/:id', async (req, res) => {
       res.status(500).send({ message: 'Server Error' });
     }})
 
+    bookingApp.get('/timings/:id/:date', async (req, res) => {
+    try{
+      const { id, date } = req.params;
+      const bookings = await Booking.find({
+        "expertId": id,
+        "date": date
+      });
+      res.send({ payload: bookings });
+    }catch(err){
+      console.error('Error fetching bookings:', err);
+    }
+    });
+
 module.exports = bookingApp

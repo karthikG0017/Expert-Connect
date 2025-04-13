@@ -46,8 +46,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTI2Y
 {
     "expertId": "67fb4397a422e77e78aa433f", 
     "date": "2025-04-15", 
-    "StartTime": "2:00",
-    "EndTime":"3:00"
+    "Time":"12 PM - 1 PM"
 }
 
 ### Get all user bookings
@@ -60,3 +59,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTNlY
 
 ###Get all bookings done by an expert using expert Id
 GET http://localhost:4000/booking-api/avail-bookings/67fb4397a422e77e78aa433f
+
+###Get all timings which are available by using expertId and date
+GET http://localhost:4000/booking-api/timings/67fb4397a422e77e78aa433f/2025-04-15

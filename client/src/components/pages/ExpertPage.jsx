@@ -5,14 +5,30 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import DatePicker from 'react-datepicker';
+import AxiosInstance from "../Auth/AxiosInstance";
 import 'react-datepicker/dist/react-datepicker.css';
 import './ExpertPage.css'
 
 function ExpertPage() {
     const expertId=useParams()
+    const [flag,setFlag]=useState(0)
+    const {user, setUser} = useAuth();
     const [expert, setExpert] = useState();
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedOption, setSelectedOption] = useState('');
+    const [availableSlots, setAvailableSlots] = useState([]);
+    const allSlots = [
+      "9 AM - 10AM",
+      "10 AM - 11AM",
+      "11 AM - 12PM",
+      "12 PM - 1PM",
+      "1 PM - 2PM",
+      "2 PM - 3PM",
+      "3 PM - 4PM",
+      "4 PM - 5PM",
+      "5 PM - 6PM"
+    ];
+
     useEffect(()=>{
         const fetchExpert=async ()=>{
             try{
@@ -26,14 +42,50 @@ function ExpertPage() {
         }
         fetchExpert()
     },[expertId])
-    const handleDateChange = (date) => {
-      const formattedDate = date.toISOString().split('T')[0]; 
+    const handleDateChange = async (date) => {
+      const formattedDate = date.toISOString().split('T')[0];
       setSelectedDate(formattedDate);
+      try {
+        const res = await axios.get(`http://localhost:4000/booking-api/timings/${expertId.expertId}/${formattedDate}`);
+        const bookedTimes = res.data.payload.map(b => b.Time);
+        const filtered = allSlots.filter(slot => !bookedTimes.includes(slot));
+        setAvailableSlots(filtered);
+      } catch (err) {
+        console.error("Error fetching available slots", err);
+      }
     };
     const handleChange = (e) => {
       setSelectedOption(e.target.value);
     };
+    const handleBook=async () => {
+      try {
+      const token = localStorage.getItem("token"); 
 
+      if (!expertId || !selectedDate || !selectedOption) {
+        alert("Please fill in all booking details");
+        return;
+      }
+
+        const bookingData={
+          expertId: expertId.expertId,
+          date:selectedDate,
+          Time:selectedOption
+        }
+        const res = await AxiosInstance.post(
+          '/booking-api/bookings',
+          bookingData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+        console.log("Booking successful:", res.data);
+        setFlag(1)
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    };
   return (
     <div>
         <h1>{expert?.domain}-{expert?.userId.name}</h1>
@@ -51,23 +103,22 @@ function ExpertPage() {
         minDate={new Date()}
         dateFormat="yyyy-MM-dd"
       />
-     <select
+        <select
         id="dropdown"
         className="form-select"
         value={selectedOption}
         onChange={handleChange}
       >
         <option value="">Select the slot</option>
-        <option value="9-10">9 AM - 10AM</option>
-        <option value="10-11">10 AM - 11AM</option>
-        <option value="11-12">11 AM - 12 PM</option>
-        <option value="1-2">1 PM - 2 PM</option>
-        <option value="2-3">2 PM - 3 PM</option>
-        <option value="3-4">3 PM - 4 PM</option>
-        <option value="4-5">4 PM - 5 PM</option>
-        <option value="5-6">5 PM - 6 PM</option>
+        {availableSlots.map((slot, index) => (
+          <option key={index} value={slot}>{slot}</option>
+        ))}
       </select>
     </div>
+    <button className="btn btn-primary" onClick={handleBook}>Book</button>
+    {
+      flag===1?<p>Booking Successful</p>:<p></p>
+    }
     </div>
 
   )
