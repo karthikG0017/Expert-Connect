@@ -3,15 +3,15 @@ const Expert = require('../models/expertModel')
 const expressAsyncHandler = require('express-async-handler')
 
 const bookAppointment = expressAsyncHandler(async(req, res) => {
-    const {expertId, date, time} = req.body
+    const {expertId, date,Time} = req.body
     const userId = req.user.id
 
     try {
-        const alreadyBooked = await Booking.findOne({expertId, date, time})
+        const alreadyBooked = await Booking.findOne({expertId, date,Time})
         if (alreadyBooked) return res.status(400).send({message: "Slot already booked"})
 
         const newBooking = await Booking.create({
-            userId, expertId, date, time
+            userId, expertId, date,Time
         })
         res.send({message: "Booked appointment", payload: newBooking})
     } catch(err) {
