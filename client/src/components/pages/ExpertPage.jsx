@@ -79,7 +79,7 @@ function ExpertPage() {
           }
         );
         console.log("Booking successful:", res.data);
-        alert("Booking succesful!");
+        alert(`Booking succesful! Session Link: ${res.data.payload.meetLink}`);
       } catch (err) {
         if (err.response.data.message === "Slot already booked") {
           alert("Slot already booked");

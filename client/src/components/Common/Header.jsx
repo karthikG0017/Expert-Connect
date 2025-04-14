@@ -25,6 +25,9 @@ function Header() {
                     ) : (
                         <>
                             <Link to="/dashboard" className="hover:underline px-4">Dashboard</Link>
+                            {
+                                user.role === "user" && <Link to="/explore-experts" className="hover:underline px-4">Explore Experts</Link>
+                            }
                             <button onClick={handleLogout} className="hover:underline">Logout</button>
                         </>
                     )

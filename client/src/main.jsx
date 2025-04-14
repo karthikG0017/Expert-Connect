@@ -11,6 +11,7 @@ import Home from './components/pages/Home.jsx';
 import Login from './components/Auth/Login.jsx';
 import Register from './components/Auth/Register.jsx';
 import Dashboard from './components/Common/Dashboard.jsx';
+import ExploreExperts from './components/pages/ExploreExperts.jsx'
 
 const browserRouterObj = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const browserRouterObj = createBrowserRouter([
       {
         path:`expert-details/:expertId`,
         element:<ExpertPage/>
+      }, 
+      {
+        path:'explore-experts', 
+        element:<ExploreExperts/>
       }
     ]
   }
