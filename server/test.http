@@ -3,32 +3,32 @@ POST http://localhost:4000/auth-api/register
 Content-Type: application/json
 
 {
-    "name": "Dukudu Navadeep", 
-    "email": "navadeep@gmail.com",
-    "password": "12345", 
+    "name": "test10", 
+    "email": "test10@gmail.com",
+    "password": "123", 
     "role": "expert"
 }
 
-### Login for user
+### Login
 POST http://localhost:4000/auth-api/login 
 Content-Type: application/json
 
 {
-    "email": "rishivar.d@gmail.com", 
-    "password": "12345"
+    "email": "test9@gmail.com", 
+    "password": "123"
 }
 
 ### Create or update expert
 POST http://localhost:4000/expert-api/experts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmI0NGU4YTQyMmU3N2U3OGFhNDM1OSIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ1MjA0MzcsImV4cCI6MTc0NTEyNTIzN30.oiikDtDs_KQvMZhgpUWEcJmtIJiP-ptOBfcrr9iFzSE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmQzZWIyOTk3ZjMyMzg3OWVmMGZmNCIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ2NTAzMjIsImV4cCI6MTc0NTI1NTEyMn0.xFsZeW75joTCfT9WRStRYTTcIe5PP8_6x0mrAMyS_V0
 
 {
-    "bio": "Certified career coach helping students navigate job interviews.",
-    "domain": "Health",
-    "price": 500,
-    "availability": ["Tuesday 16:00-18:00", "Friday 10:00-12:00"],
-    "tags": ["Help", "Physical", "Mental"]
+  "bio": "Mindfulness coach focused on stress management and emotional clarity.",
+  "domain": "Mental Health",
+  "price": 500,
+  "availability": ["Monday 19:00-21:00", "Thursday 14:00-16:00"],
+  "tags": ["Mindfulness", "Meditation", "Clarity"]
 }
 
 ### Get all experts by using filter
@@ -36,7 +36,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmI0NGU4Y
 GET http://localhost:4000/expert-api/expert
 
 ### Get expert by id
-GET http://localhost:4000/expert-api/expert/67fb4397a422e77e78aa433f
+GET http://localhost:4000/expert-api/expert/67fa73f30efdca202fda36ea
 
 ### Book an appointment
 POST http://localhost:4000/booking-api/bookings
@@ -44,7 +44,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTI2YTQxNzQxMDIzOGMwZjYxMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ0NTI2OTc5LCJleHAiOjE3NDUxMzE3Nzl9.SiCFSrZ38nrcxklpLGjWqFZLAdBZ_E7rpXs3FF0LrI0
 
 {
-    "expertId": "67fb4397a422e77e78aa433f", 
+    "expertId": "67fa73f30efdca202fda36ea", 
     "date": "2025-04-15", 
     "Time":"12 PM - 1 PM"
 }
@@ -55,7 +55,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTI2Y
 
 ### Get all expert bookings
 GET http://localhost:4000/booking-api/expert-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTNlYTQxNzQxMDIzOGMwZjYxNyIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ1MjcxMzUsImV4cCI6MTc0NTEzMTkzNX0.BJfIvaKuRcufmjE7vKwIdxC5E_Ksj3ph-YfYcKNmz40
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE3MWM0MGVmZGNhMjAyZmRhMzZlNSIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ2MzY3MjIsImV4cCI6MTc0NTI0MTUyMn0.uDRvZfIHKr5xoEg1Dbcvtr3VPQHtWsHNis0us51j8EM
 
 ###Get all bookings done by an expert using expert Id
 GET http://localhost:4000/booking-api/avail-bookings/67fb4397a422e77e78aa433f

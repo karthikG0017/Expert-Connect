@@ -11,6 +11,9 @@ const bookingSchema=new mongoose.Schema({
         ref:'Expert', 
         required: true 
     },
+    expertName:{
+        type:String
+    },
     date:{
         type: String,
         required: true
