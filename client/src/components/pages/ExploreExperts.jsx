@@ -112,7 +112,7 @@ function ExploreExperts() {
                 <>
                   <div className="row">
                       {experts?.map((exp) => (
-                          <div className="col-md-4 mb-4" key={exp.userId.email}>
+                          <div className="col-md-4 mb-4" key={exp.userId?.email}>
                               <div className="card shadow-sm">
                                   <div className="card-body">
                                       <h5 className="card-title">{exp.userId?.name}</h5>

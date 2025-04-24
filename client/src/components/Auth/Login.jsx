@@ -2,7 +2,8 @@ import React from "react";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../contexts/AuthContext';
-import axios from 'axios'
+import axios from 'axios';
+import "./Login.css"; // Import the CSS file
 
 function Login() {
     const [role, setRole] = useState('user');
@@ -36,31 +37,60 @@ function Login() {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-sky-50">
-            <form onSubmit={handleLogin} className="bg-white shadow-md p-8 rounded-xl w-full max-w-md space-y-6">
-                <h2 className="text-2xl font-bold text-center text-sky-700">Login</h2>
-
-                <div className="flex justify-center space-x-4">
-                    <button
-                        type="button"
-                        className={`px-4 py-2 rounded-lg ${role === 'user' ? 'bg-sky-600 text-primary' : 'bg-gray-200'}`}
-                        onClick={() => setRole('user')}
-                        >User</button>
-                    <button
-                        type="button"
-                        className={`px-4 py-2 rounded-lg ${role === 'expert' ? 'bg-sky-600 text-primary' : 'bg-gray-200'}`}
-                        onClick={() => setRole('expert')}
-                    >Expert</button>
+        <div className="login-container">
+            <div className="login-card">
+                <div className="login-header">
+                    <h2 className="login-title">Sign In</h2>
+                    <p className="login-subtitle">Access your Expert Connect account</p>
                 </div>
+                
+                <form onSubmit={handleLogin}>
+                    <div className="role-selector">
+                        <button
+                            type="button"
+                            className={`role-button ${role === 'user' ? 'role-button-active' : ''}`}
+                            onClick={() => setRole('user')}
+                        >User</button>
+                        <button
+                            type="button"
+                            className={`role-button ${role === 'expert' ? 'role-button-active' : ''}`}
+                            onClick={() => setRole('expert')}
+                        >Expert</button>
+                    </div>
 
-                <input type="email" placeholder="Email" className="w-full p-3 border rounded-lg" required onChange={(e) => setEmail(e.target.value)} />
-                <br/>
-                <input type="password" placeholder="Password" className="w-full p-3 border rounded-lg" required onChange={(e) => setPassword(e.target.value)} />
-                <br/>
-                <button type="submit" className="w-full bg-sky-600 text-secondary py-3 rounded-lg hover:bg-sky-700">Login</button>
-            </form>
+                    <div className="form-group">
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Email Address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" className="submit-button">
+                        Sign In
+                    </button>
+                    
+                    <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+                        <a href="/register" className="form-link">Don't have an account? Register</a>
+                    </div>
+                </form>
+            </div>
         </div>
     );
-};
+}
 
-export default Login
+export default Login;
