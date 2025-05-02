@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Header.css";
 import { useAuth } from "../../contexts/AuthContext";
 
 function Header() {
@@ -8,34 +9,45 @@ function Header() {
 
     const handleLogout = () => {
         logout();
+        // Redirect to home page instead of dashboard
         navigate("/");
     };
 
     return (
-        <div className="w-full p-6 flex justify-between items-center shadow-md bg-white">
-            <h1 className="text-3xl font-bold text-sky-600">Expert Connect</h1>
-            <div className="flex gap-4">
-                {
-                    !user ? (
-                        <>
-                            <Link to="">Home</Link>
-                            <Link to="/login" className="text-sky-600 hover:underline px-4">Login</Link>
-                            <Link to="/register" className="bg-sky-600 rounded-lg hover:bg-sky-700">Register</Link>
-                        </>
-                    ) : (
-                        <>
-                            <Link to="/dashboard" className="hover:underline px-4">Dashboard</Link>
-                            {
-                                user.role === "user" && <Link to="/explore-experts" className="hover:underline px-4">Explore Experts</Link>
-                            }
-                            <button onClick={handleLogout} className="hover:underline">Logout</button>
-                        </>
-                    )
-                }
-
+        <header className="header">
+            <div className="header-container">
+                <h1 
+                  className="header-logo" 
+                  onClick={() => navigate("/")} 
+                  style={{ cursor: "pointer" }}
+                >
+                  Expert Connect
+                </h1>
+                <nav className="header-nav">
+                    {
+                        !user ? (
+                            <>
+                                <Link to="" className="nav-link">Home</Link>
+                                <Link to="/login" className="nav-link nav-link-login">Login</Link>
+                                <Link to="/register" className="nav-link nav-link-register">Register</Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/dashboard" className="nav-link">Dashboard</Link>
+                                {
+                                    user.role === "user" && <Link to="/explore-experts" className="nav-link">Explore Experts</Link>
+                                }
+                                    {
+                                    user.role === "expert" && <Link to="/edit-profile" className="nav-link">Profile</Link>
+                                }
+                                <button onClick={handleLogout}>Logout</button>
+                            </>
+                        )
+                    }
+                </nav>
             </div>
-        </div>
+        </header>
     );
-};
+}
 
 export default Header;

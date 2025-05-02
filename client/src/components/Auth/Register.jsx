@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import axios from 'axios'
 import { Link } from "react-router-dom";
+import "./Register.css";
+
 
 function Register() {
     const [role, setRole] = useState('user');
@@ -35,34 +37,69 @@ function Register() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-sky-50">
-            <form onSubmit={handleRegister} className="bg-white shadow-md p-8 rounded-xl w-full max-w-md space-y-6">
-                <h2 className="text-2xl font-bold text-center text-sky-700">Register</h2>
-
-                <div className="flex justify-center space-x-4">
-                    <button
-                        type="button"
-                        className={`px-4 py-2 rounded-lg ${role === 'user' ? 'bg-sky-600 text-primary' : 'bg-gray-200'}`}
-                        onClick={() => setRole('user')}
-                    >User</button>
-                    <button
-                        type="button"
-                        className={`px-4 py-2 rounded-lg ${role === 'expert' ? 'bg-sky-600 text-primary' : 'bg-gray-200'}`}
-                        onClick={() => setRole('expert')}
-                    >Expert</button>
+        <div className="register-container">
+            <div className="register-card">
+                <div className="register-header">
+                    <h2 className="register-title">Create Account</h2>
+                    <p className="register-subtitle">Join the Expert Connect platform</p>
                 </div>
+                
+                <form onSubmit={handleRegister}>
+                    <div className="role-selector">
+                        <button
+                            type="button"
+                            className={`role-button ${role === 'user' ? 'role-button-active' : ''}`}
+                            onClick={() => setRole('user')}
+                        >User</button>
+                        <button
+                            type="button"
+                            className={`role-button ${role === 'expert' ? 'role-button-active' : ''}`}
+                            onClick={() => setRole('expert')}
+                        >Expert</button>
+                    </div>
 
-                <input type="text" placeholder="Name" className="w-full p-3 border rounded-lg" required onChange={(e) => setName(e.target.value)} />
-                <br/>
-                <input type="email" placeholder="Email" className="w-full p-3 border rounded-lg" required onChange={(e) => setEmail(e.target.value)} />
-                <br/>
-                <input type="password" placeholder="Password" className="w-full p-3 border rounded-lg" required onChange={(e) => setPassword(e.target.value)} />
-                <br/>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Full Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Email Address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <button type="submit" className="w-full bg-sky-600 text-dark py-3 rounded-lg hover:bg-sky-700">Register</button>
-                <br/>
-                <Link to="/login">Already have an account?</Link>
-            </form>
+                    <button type="submit" className="submit-button">
+                        Register
+                    </button>
+                    
+                    <div className="alt-action">
+                        <a href="/login" className="form-link">Already have an account? Sign in</a>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

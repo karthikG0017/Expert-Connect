@@ -1,29 +1,56 @@
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 
-const expertSchema=new mongoose.Schema({
-    userId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
-    },
-    bio:{
-        type:String
-    },
-    domain:{
-        type:String
-    },
-    price:{
-        type:Number
-    },
-    availability:{
-        type:[String]
-    },
-    rating:{
-        type:Number,
-        default:0
-    },
-    tags:{
-        type:[String]
-    }
+const addressSchema = new mongoose.Schema({
+  streetAddress: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+    required: true
+  }
+}, { _id: false })
+
+const expertSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  bio: {
+    type: String,
+    required: true
+  },
+  domain: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  rating: {
+    type: Number,
+    default: 0
+  },
+  tags: {
+    type: [String],
+    default: []
+  },
+  address: {
+    type: addressSchema,
+    required: true
+  },
+  availability: {
+    type: [String],
+    default: []
+  }
+}, {
+  timestamps: true
 })
 
-module.exports=mongoose.model('Expert',expertSchema)
+module.exports = mongoose.model('Expert', expertSchema)

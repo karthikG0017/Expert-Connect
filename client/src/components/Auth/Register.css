@@ -1,0 +1,316 @@
+/* Register.css - Professional styling with background image */
+
+/* Main container styles remain the same */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('https://www.sjp.ac.lk/wp-content/uploads/2021/10/What-is-Management.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    position: relative;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  html body .register-container {
+    background-color: #1a3a63 !important;
+  }
+  
+  .register-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(22, 41, 70, 0.8); /* Dark blue tinted overlay */
+    z-index: 1;
+  }
+  
+  /* Card styles remain the same */
+  .register-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    padding: 2.5rem 2rem;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: cardFadeIn 0.5s ease-out forwards;
+  }
+  
+  @keyframes cardFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Header styles remain the same */
+  .register-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .register-title {
+    font-size: 1.75rem;
+    color: #1a3a63;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+  
+  .register-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #1a3a63, #3182ce);
+    border-radius: 2px;
+  }
+  
+  .register-subtitle {
+    color: #486581;
+  }
+  
+  /* Role selector - Enhanced hover effects */
+  .role-selector {
+    display: flex;
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    padding: 0.4rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .role-button {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    color: #627d98;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Enhanced role button hover effect */
+  .role-button:hover {
+    background-color: rgba(26, 58, 99, 0.1);
+    color: #1a3a63;
+    transform: translateY(-1px);
+  }
+  
+  .role-button-active {
+    background-color: #1a3a63;
+    color: white;
+    box-shadow: 0 2px 5px rgba(26, 58, 99, 0.2);
+  }
+  
+  /* Ripple effect for role buttons */
+  .role-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  .role-button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 0.5;
+    }
+    20% {
+      transform: scale(25, 25);
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(40, 40);
+    }
+  }
+  
+  /* Form inputs - Enhanced hover and focus states */
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    border: 1px solid #d9e2ec;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: #fbfdff;
+  }
+  
+  /* Input hover state */
+  .form-control:hover {
+    border-color: #3182ce;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(49, 130, 206, 0.1);
+  }
+  
+  /* Input focus state */
+  .form-control:focus {
+    outline: none;
+    border-color: #1a3a63;
+    box-shadow: 0 0 0 4px rgba(26, 58, 99, 0.15);
+    background-color: #ffffff;
+    transform: translateY(-2px);
+  }
+  
+  /* Submit button with enhanced hover effect */
+  .submit-button {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background-color: #1a3a63;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Enhanced hover effects for submit button */
+  .submit-button:hover {
+    background-color: #2c5282;
+    box-shadow: 0 8px 15px rgba(26, 58, 99, 0.3);
+    transform: translateY(-3px);
+  }
+  
+  /* Add shimmer effect on hover */
+  .submit-button::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 45%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 55%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transition: all 0.6s ease;
+    transform: rotate(45deg);
+  }
+  
+  .submit-button:hover::before {
+    top: -30%;
+    left: -30%;
+  }
+  
+  .submit-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(26, 58, 99, 0.3);
+  }
+  
+  /* Links with enhanced hover */
+  .form-link {
+    color: #1a3a63;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .form-link:hover {
+    color: #2c5282;
+    transform: translateY(-1px);
+  }
+  
+  /* Animated underline effect for links */
+  .form-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -1px;
+    left: 0;
+    background-color: #2c5282;
+    transition: all 0.3s ease;
+  }
+  
+  .form-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Additional styles for registration page */
+  .terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+  }
+  
+  .terms-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .terms-checkbox input[type="checkbox"]:hover {
+    transform: scale(1.1);
+  }
+  
+  .terms-checkbox label {
+    color: #486581;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  /* For "Already have an account" link at bottom */
+  .alt-action {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #d9e2ec;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .register-card {
+      padding: 2rem 1.5rem;
+    }
+  }
