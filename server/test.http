@@ -1,12 +1,76 @@
+# ### Register for user
+# POST http://localhost:4000/auth-api/register
+# Content-Type: application/json
+
+# {
+#     "name": "test10", 
+#     "email": "test10@gmail.com",
+#     "password": "123", 
+#     "role": "expert"
+# }
+
+# ### Login
+# POST http://localhost:4000/auth-api/login 
+# Content-Type: application/json
+
+# {
+#     "email": "test10@gmail.com", 
+#     "password": "123"
+# }
+
+# ### Create or update expert
+# POST http://localhost:4000/expert-api/experts
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmQzZWIyOTk3ZjMyMzg3OWVmMGZmNCIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ2NTAzMjIsImV4cCI6MTc0NTI1NTEyMn0.xFsZeW75joTCfT9WRStRYTTcIe5PP8_6x0mrAMyS_V0
+
+# {
+#   "bio": "Mindfulness coach focused on stress management and emotional clarity.",
+#   "domain": "Mental Health",
+#   "price": 500,
+#   "availability": ["Monday 19:00-21:00", "Thursday 14:00-16:00"],
+#   "tags": ["Mindfulness", "Meditation", "Clarity"]
+# }
+
+# ### Get all experts by using filter
+# ### expert?domain=Web%20Development&minPrice=30&maxPrice=100&tag=React
+# GET http://localhost:4000/expert-api/expert
+
+# ### Get expert by id
+# GET http://localhost:4000/expert-api/expert/67fa73f30efdca202fda36ea
+
+# ### Book an appointment
+# POST http://localhost:4000/booking-api/bookings
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTI2YTQxNzQxMDIzOGMwZjYxMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ0NTI2OTc5LCJleHAiOjE3NDUxMzE3Nzl9.SiCFSrZ38nrcxklpLGjWqFZLAdBZ_E7rpXs3FF0LrI0
+
+# {
+#     "expertId": "67fa73f30efdca202fda36ea", 
+#     "date": "2025-04-15", 
+#     "Time":"12 PM - 1 PM"
+# }
+
+# ### Get all user bookings
+# GET http://localhost:4000/booking-api/user-bookings
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE0OTI2YTQxNzQxMDIzOGMwZjYxMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ0NTI2OTc5LCJleHAiOjE3NDUxMzE3Nzl9.SiCFSrZ38nrcxklpLGjWqFZLAdBZ_E7rpXs3FF0LrI0
+
+# ### Get all expert bookings
+# GET http://localhost:4000/booking-api/expert-bookings
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmE3MWM0MGVmZGNhMjAyZmRhMzZlNSIsInJvbGUiOiJleHBlcnQiLCJpYXQiOjE3NDQ2MzY3MjIsImV4cCI6MTc0NTI0MTUyMn0.uDRvZfIHKr5xoEg1Dbcvtr3VPQHtWsHNis0us51j8EM
+
+# ###Get all bookings done by an expert using expert Id
+# GET http://localhost:4000/booking-api/avail-bookings/67fb4397a422e77e78aa433f
+
+# ###Get all timings which are available by using expertId and date
+# GET http://localhost:4000/booking-api/timings/67fb4397a422e77e78aa433f/2025-04-15
 ### Register for user
 POST http://localhost:4000/auth-api/register
 Content-Type: application/json
 
 {
-    "name": "test10", 
-    "email": "test10@gmail.com",
+    "name": "test9", 
+    "email": "test9@gmail.com",
     "password": "123", 
-    "role": "expert"
+    "role": "user"
 }
 
 ### Login
@@ -37,6 +101,9 @@ GET http://localhost:4000/expert-api/expert
 
 ### Get expert by id
 GET http://localhost:4000/expert-api/expert/67fa73f30efdca202fda36ea
+
+### Get expert by userId
+GET http://localhost:4000/expert-api/exp/67fb4487a422e77e78aa4352
 
 ### Book an appointment
 POST http://localhost:4000/booking-api/bookings

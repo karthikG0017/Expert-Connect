@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import AxiosInstance from '../Auth/AxiosInstance'
+import './ExpertDashboard.css'; // Add this import
 
 function ExpertDashboard() {
 
@@ -16,26 +17,55 @@ function ExpertDashboard() {
     }, []);
 
     return (
-        <div>
-            {bookings && bookings.length > 0 ? ( <>
-                <div className="p-6">
-                    <h1 className="text-xl font-bold mb-4">Your Upcoming Sessions</h1>
-                    {bookings.map((booking) => (
-                        <div key={booking._id} className="p-4 border rounded mb-2">
-                            <p><strong>User:</strong> {booking.userId?.email}</p>
-                            <p><strong>Date:</strong> {booking.date}</p>
-                            <p><strong>Time:</strong> {booking.Time}</p>
-                            <p><strong>Status:</strong> {booking.isConfirmed ? "Confirmed" : "Not yet confirmed"}</p>
-                            <a href={booking.meetLink} className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">
-                                Start Session
-                            </a>
-                        </div>
-                    ))}
+      <div className="dashboard-container">
+        <h1 className="dashboard-title">Expert Dashboard</h1>
+        
+        {bookings && bookings.length > 0 ? (
+          <div className="bookings-grid">
+            {bookings.map((booking) => (
+              <div className="booking-card" key={booking._id}>
+                <div className="user-info">
+                  <div className="user-avatar">
+                    {booking.userId?.name?.charAt(0) || 'U'}
+                  </div>
+                  <div className="user-email">{booking.userId?.email}</div>
                 </div>
-            </> ) : (
-                <h2>No appointments found</h2>
-            )}
-        </div>
+                
+                <div className="session-details">
+                  <div className="detail-item">
+                    <span className="detail-label">Date:</span>
+                    <span className="detail-value">{new Date(booking.date).toLocaleDateString()}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="detail-label">Time:</span>
+                    <span className="detail-value">{booking.time}</span>
+                  </div>
+                  <div className="detail-item">
+                    <span className="detail-label">Duration:</span>
+                    <span className="detail-value">{booking.duration} minutes</span>
+                  </div>
+                </div>
+                
+                <div className="status-container">
+                  <span className={`status-indicator ${booking.isConfirmed ? 'status-confirmed' : 'status-unconfirmed'}`}>
+                    {booking.isConfirmed ? 'Confirmed' : 'Not Confirmed'}
+                  </span>
+                </div>
+                
+                {booking.isConfirmed && (
+                  <a href={`/session/${booking._id}`} className="start-session">
+                    Start Session
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="no-bookings">
+            No bookings found. When users book sessions with you, they will appear here.
+          </div>
+        )}
+      </div>
     );
 };
 

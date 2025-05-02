@@ -1,0 +1,217 @@
+/* Header.css - Professional styling to match home page */
+
+/* Import Font Awesome for icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
+
+.header {
+  width: 100%;
+  background: linear-gradient(to right, #1a3a63, #2c5282, #3182ce); /* Professional blue gradient */
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+/* Logo styling */
+.header-logo {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+}
+
+/* Logo icon */
+.header-logo::before {
+  content: "\f0b1"; /* Briefcase icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 12px;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Styling for all nav links to make them equal length */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.6rem 0;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.3px;
+  width: 120px; /* Fixed width for equal sizing */
+  text-align: center;
+}
+
+/* Enhanced styling for Home, Login, Register links */
+.nav-link[href="/"],
+.nav-link[href="/login"],
+.nav-link[href="/register"] {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  color: white;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Home link with custom icon */
+.nav-link[href="/"]:before {
+  content: "\f015"; /* Home icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Login link with custom icon */
+.nav-link[href="/login"]:before {
+  content: "\f2f6"; /* Sign in icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Register link with custom icon */
+.nav-link[href="/register"]:before {
+  content: "\f234"; /* User plus icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Hover effects for highlighted links */
+.nav-link[href="/"]:hover,
+.nav-link[href="/login"]:hover,
+.nav-link[href="/register"]:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+/* Active state for current page */
+.nav-link.active {
+  background: white !important;
+  color: #2c5282 !important; /* Match header blue */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Dashboard link */
+.nav-link[to="/dashboard"]::before {
+  content: "\f3fd"; /* Dashboard icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Logout button styling */
+.header-nav button {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.6rem 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px; /* Same fixed width as nav links */
+}
+
+.header-nav button::before {
+  content: "\f2f5"; /* Sign out icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.header-nav button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Glow effect on hover */
+.header-logo:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 1rem;
+  }
+  
+  .header-logo {
+    font-size: 1.5rem;
+  }
+  
+  .header-logo::before {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    margin-right: 8px;
+  }
+  
+  .nav-link, .header-nav button {
+    width: 100px;
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+  }
+}
+
+/* Animation for page load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-container {
+  animation: fadeIn 0.4s ease-out forwards;
+}
