@@ -1,5 +1,219 @@
-.booking-ap{
-    width:550px;
-    margin-left: 300px;
-    gap:30px
-}
+/* ExpertPage.css */
+
+/* Main container styling */
+.expert-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+  
+  /* Expert profile section */
+  .expert-profile {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .expert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #edf2f7;
+  }
+  
+  .expert-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
+  }
+  
+  .expert-bio {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+  }
+  
+  .expert-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .expert-detail-item {
+    background-color: #f7fafc;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .detail-label {
+    font-weight: 600;
+    color: #718096;
+  }
+  
+  .detail-value {
+    font-weight: 700;
+    color: #2d3748;
+  }
+  
+  .price-tag {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #3182ce;
+  }
+  
+  .rating-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .rating-value {
+    font-weight: 700;
+    color: #2d3748;
+  }
+  
+  .contact-info {
+    color: #4a5568;
+  }
+  
+  /* Booking section */
+  .booking-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+  }
+  
+  .booking-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #edf2f7;
+  }
+  
+  .booking-ap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin-left: 0;
+  }
+  
+  .booking-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin: 0;
+    min-width: 100px;
+  }
+  
+  /* Date picker styling */
+  .react-datepicker-wrapper {
+    width: auto;
+  }
+  
+  .datepicker-custom {
+    padding: 0.625rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    width: 150px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .datepicker-custom:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+    outline: none;
+  }
+  
+  /* Dropdown styling */
+  .time-slot-select {
+    padding: 0.625rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    min-width: 200px;
+    background-color: white;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .time-slot-select:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+    outline: none;
+  }
+  
+  /* No slots message */
+  .no-slots-message {
+    color: #e53e3e;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+  
+  /* Book button */
+  .book-button {
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .book-button:hover {
+    background-color: #2c5282;
+  }
+  
+  .book-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.5);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .expert-page-container {
+      padding: 1rem;
+    }
+  
+    .expert-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .booking-ap {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 0;
+      gap: 1rem;
+    }
+  
+    .booking-label {
+      margin-bottom: 0.5rem;
+    }
+  
+    .time-slot-select,
+    .datepicker-custom {
+      width: 100%;
+    }
+  }

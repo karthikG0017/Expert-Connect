@@ -41,6 +41,7 @@ function ExpertPage() {
     };
     fetchExpert();
   }, [expertId]);
+  
   const handleDateChange = async (date) => {
     const formattedDate = date.toISOString().split("T")[0];
     setSelectedDate(formattedDate);
@@ -55,9 +56,11 @@ function ExpertPage() {
       console.error("Error fetching available slots", err);
     }
   };
+  
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
   };
+  
   const handleBook = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -92,52 +95,81 @@ function ExpertPage() {
       }
     }
   };
+  
   return (
-    <div>
-      <h1>
-        {expert?.domain}-{expert?.userId.name}
-      </h1>
-      <p>{expert?.bio}</p>
-      <strong>Price-₹{expert?.price}</strong>
-      <p>Rating-{expert?.rating}</p>
-      <p>For further details-{expert?.userId.email}</p>
-      <h3>Book an appointment:</h3>
-      <div className="my-3 d-flex booking-ap">
-        <h5>Select Date:</h5>
-        <DatePicker
-          selected={selectedDate ? new Date(selectedDate) : null}
-          onChange={handleDateChange}
-          className="form-control"
-          minDate={new Date()}
-          dateFormat="yyyy-MM-dd"
-        />
-        <br/>
-        {
-          availableSlots && availableSlots.length > 0 ? (
-            <>
-
-              <select
-                id="dropdown"
-                className="form-select"
-                value={selectedOption}
-                onChange={handleChange}
-              >
-                <option value="">Select the slot</option>
-                {availableSlots.map((slot, index) => (
-                  <option key={index} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </select>
-            </>
-          ) : (
-            selectedDate && <h2>No available slots on this day!</h2>
-          )
-        }
-      </div>
-      <button className="btn btn-primary" onClick={handleBook}>
-        Book
-      </button>
+    <div className="expert-page-container">
+      {expert && (
+        <>
+          <div className="expert-profile">
+            <div className="expert-header">
+              <h1 className="expert-title">
+                {expert?.domain} - {expert?.userId.name}
+              </h1>
+            </div>
+            
+            <p className="expert-bio">{expert?.bio}</p>
+            
+            <div className="expert-details">
+              <div className="expert-detail-item">
+                <span className="detail-label">Price:</span>
+                <span className="price-tag">₹{expert?.price}</span>
+              </div>
+              
+              <div className="expert-detail-item">
+                <span className="detail-label">Rating:</span>
+                <div className="rating-display">
+                  <span className="rating-value">{expert?.rating}</span>
+                </div>
+              </div>
+              
+              <div className="expert-detail-item">
+                <span className="detail-label">Contact:</span>
+                <span className="contact-info">{expert?.userId.email}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="booking-section">
+            <h3 className="booking-header">Book an appointment:</h3>
+            
+            <div className="booking-ap">
+              <h5 className="booking-label">Select Date:</h5>
+              <DatePicker
+                selected={selectedDate ? new Date(selectedDate) : null}
+                onChange={handleDateChange}
+                className="datepicker-custom"
+                minDate={new Date()}
+                dateFormat="yyyy-MM-dd"
+              />
+              
+              {availableSlots && availableSlots.length > 0 ? (
+                <select
+                  id="dropdown"
+                  className="time-slot-select"
+                  value={selectedOption}
+                  onChange={handleChange}
+                >
+                  <option value="">Select the slot</option>
+                  {availableSlots.map((slot, index) => (
+                    <option key={index} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                selectedDate && 
+                <div className="no-slots-message">
+                  No available slots on this day!
+                </div>
+              )}
+            </div>
+            
+            <button className="book-button" onClick={handleBook}>
+              Book
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

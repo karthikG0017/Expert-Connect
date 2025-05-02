@@ -15,7 +15,13 @@ function Header() {
     return (
         <header className="header">
             <div className="header-container">
-                <h1 className="header-logo">Expert Connect</h1>
+                <h1 
+                  className="header-logo" 
+                  onClick={() => navigate("/")} 
+                  style={{ cursor: "pointer" }}
+                >
+                  Expert Connect
+                </h1>
                 <nav className="header-nav">
                     {
                         !user ? (

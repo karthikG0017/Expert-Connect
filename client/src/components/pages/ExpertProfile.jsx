@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from "../../contexts/AuthContext";
-import AxiosInstance from "../Auth/AxiosInstance"; // Import your AxiosInstance
+import AxiosInstance from "../Auth/AxiosInstance";
+import "./ExpertProfile.css"; // Add this import
 
 function ExpertProfile() {
   const { user } = useAuth();
@@ -64,62 +65,82 @@ function ExpertProfile() {
   }, [user]);
 
   return (
-    <div>
-      <h1 className="text-xl font-bold mb-4">
+    <div className="profile-container">
+      <div className="profile-header">
+        <h1 className="profile-title">Expert Profile</h1>
+        <p className="profile-subtitle">Complete your profile to start accepting bookings</p>
+      </div>
+      
+      {/* {message && (
+        <div className={`message ${message.includes('success') ? 'success-message' : 'error-message'}`}>
+          {message}
+        </div>
+      )}
+       */}
+       <h2 className="text-xl font-bold mb-4">
         {message === 'Expert Not Found' ? 'Enter Expert Details' : 'Edit Expert Details'}
-      </h1>
-
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block font-semibold">Bio:</label>
+      </h2>
+      
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="form-label" htmlFor="bio">Bio</label>
           <textarea
+            id="bio"
+            className="form-control"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            rows="4"
-            className="w-full border rounded p-2"
-            placeholder="Enter your bio..."
+            placeholder="Tell clients about your expertise and experience..."
+            required
           />
         </div>
-        <div>
-          <label className="block font-semibold">Price ($):</label>
+        
+        <div className="form-group">
+          <label className="form-label" htmlFor="price">Hourly Rate (₹)</label>
           <input
             type="number"
+            id="price"
+            className="form-control"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="w-full border rounded p-2"
-            placeholder="e.g., 50"
+            placeholder="Your hourly rate in INR"
+            required
           />
         </div>
-        <div>
-          <label className="block font-semibold">Domain:</label>
+        
+        <div className="form-group">
+          <label className="form-label" htmlFor="domain">Domain</label>
           <select
+            id="domain"
+            className="form-control"
             value={domain}
             onChange={(e) => setDomain(e.target.value)}
-            className="w-full border rounded p-2"
+            required
           >
-            <option value="">-- Select Domain --</option>
-            <option value="Career Coaching">Career Coaching</option>
-            <option value="Sports">Sports</option>
-            <option value="Education">Education</option>
-            <option value="Health">Health</option>
+            <option value="">Select your domain</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Mobile Development">Mobile Development</option>
+            <option value="UI/UX Design">UI/UX Design</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Machine Learning">Machine Learning</option>
+            <option value="DevOps">DevOps</option>
+            <option value="Blockchain">Blockchain</option>
           </select>
         </div>
-
-        <div>
-          <label className="block font-semibold">Tags (comma separated):</label>
+        
+        <div className="form-group">
+          <label className="form-label" htmlFor="tags">Tags (comma separated)</label>
           <input
             type="text"
+            id="tags"
+            className="form-control"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            className="w-full border rounded p-2"
-            placeholder="e.g., AI, ML, Python"
+            placeholder="e.g., React, Node.js, UI Design"
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
-        >
-          {message === 'Expert Not Found' ? 'Create Profile' : 'Update Profile'}
+        
+        <button type="submit" className="submit-button">
+          Save Profile
         </button>
       </form>
     </div>
