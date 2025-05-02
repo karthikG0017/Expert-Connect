@@ -1,35 +1,27 @@
-const exp = require('express')
-const Booking = require('../models/bookingModel')
-const bookingApp = exp.Router()
-const {bookAppointment, getUserBookings, getExpertBookings} = require('../controllers/bookingController')
+const express = require('express')
+const bookingApp = express.Router()
 const verifyToken = require('../middleware/authMiddleware')
+const {
+  bookAppointment,
+  getUserBookings,
+  getExpertBookings,
+  updateBookingStatus,
+  getBookingsByExpertAndDate
+} = require('../controllers/bookingController')
 
+// Create a booking
 bookingApp.post('/bookings', verifyToken, bookAppointment)
+
+// Get user's bookings
 bookingApp.get('/user-bookings', verifyToken, getUserBookings)
+
+// Get expert's bookings
 bookingApp.get('/expert-bookings', verifyToken, getExpertBookings)
 
-bookingApp.get('/avail-bookings/:id', async (req, res) => {
-    try {
-      const expId = req.params.id;
-      const bookings = await Booking.find({ 'expertId': expId });
-  
-      res.send({ payload: bookings });
-    } catch (err) {
-      console.error('Error fetching bookings:', err);
-      res.status(500).send({ message: 'Server Error' });
-    }})
+// Update booking status (approve/reject)
+bookingApp.post('/update-status', verifyToken, updateBookingStatus)
 
-    bookingApp.get('/timings/:id/:date', async (req, res) => {
-    try{
-      const { id, date } = req.params;
-      const bookings = await Booking.find({
-        "expertId": id,
-        "date": date
-      });
-      res.send({ payload: bookings });
-    }catch(err){
-      console.error('Error fetching bookings:', err);
-    }
-    });
+// Get bookings for a specific expert on a specific date
+bookingApp.get('/timings/:id/:date', getBookingsByExpertAndDate)
 
 module.exports = bookingApp

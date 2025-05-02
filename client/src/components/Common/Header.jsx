@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Header.css";
 import { useAuth } from "../../contexts/AuthContext";
-import "./Header.css"; // Import the CSS file
 
 function Header() {
     const {user, logout} = useAuth();
@@ -9,6 +9,7 @@ function Header() {
 
     const handleLogout = () => {
         logout();
+        // Redirect to home page instead of dashboard
         navigate("/");
     };
 
@@ -37,9 +38,9 @@ function Header() {
                                     user.role === "user" && <Link to="/explore-experts" className="nav-link">Explore Experts</Link>
                                 }
                                     {
-                                        user.role === "expert" && <Link to="/edit-profile" className="nav-link">Edit Profile</Link>
-                                    }
-                                <button onClick={handleLogout} className="nav-link nav-link-logout">Logout</button>
+                                    user.role === "expert" && <Link to="/edit-profile" className="nav-link">Profile</Link>
+                                }
+                                <button onClick={handleLogout}>Logout</button>
                             </>
                         )
                     }

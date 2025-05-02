@@ -1,36 +1,23 @@
-// const exp = require('express')
-// const expertApp = exp.Router()
-// const {createOrUpdateExpert, getAllExperts, getExpertById} = require('../controllers/expertController')
-// const verifyToken = require('../middleware/authMiddleware')
-
-// expertApp.post('/experts', verifyToken, createOrUpdateExpert)
-// expertApp.get('/expert', getAllExperts)
-// expertApp.get('/expert/:id', getExpertById)
-
-// module.exports = expertApp
-const exp = require('express')
-const Experts=require('../models/expertModel')
-const expertApp = exp.Router()
-const {createOrUpdateExpert, getAllExperts, getExpertById} = require('../controllers/expertController')
+const express = require('express')
+const expertApp = express.Router()
 const verifyToken = require('../middleware/authMiddleware')
+const {
+  createOrUpdateExpert,
+  getAllExperts,
+  getExpertById,
+  getExpertProfile
+} = require('../controllers/expertController')
 
-expertApp.post('/experts', verifyToken, createOrUpdateExpert)
+// Create or update expert profile
+expertApp.post('/expert', verifyToken, createOrUpdateExpert)
+
+// Get all experts (with optional filtering)
 expertApp.get('/expert', getAllExperts)
+
+// Get expert by ID
 expertApp.get('/expert/:id', getExpertById)
 
-expertApp.get('/exp/:user_id',async(req,res)=>{
-    try{
-        const user_id = req.params.user_id
-        const expert=await Experts.find({userId:user_id})
-        if(expert.length===0)
-        {
-            res.send({message:'Expert Not Found'})
-        }
-        else
-        res.send({message:'Expert Found',payload:expert})
-    }catch(err){
-        res.status(500).send({message:'Server Error'})
-    }
-})
+// Get logged-in expert's profile
+expertApp.get('/expert-profile', verifyToken, getExpertProfile)
 
 module.exports = expertApp
